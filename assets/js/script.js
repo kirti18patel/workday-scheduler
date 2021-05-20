@@ -1,9 +1,8 @@
 // getting current date
 var currentDate = moment().format('dddd, MMMM Do');
-
+var currentHour = moment().format('h A');
 // updated current date in page
-var currentDateEl = document.querySelector("#currentDay");
-currentDateEl.innerHTML = currentDate;
+$("#currentDay").text(currentDate);
 
 // var containerEl = document.querySelector(".container");
 var displayAll = function(){
@@ -17,8 +16,14 @@ var displayAll = function(){
     .text(timeAllDay[i]);
 
     var statusEl = $("<div>")
-    .addClass("col-xl-8 present p-3")
+    .addClass("col-xl-8 p-3")
     .text("");
+    if(currentHour === timeAllDay[i]){
+        statusEl.addClass("present");
+    }
+    else{
+        statusEl.addClass("past");
+    }
 
     var saveBtnEl = $("<div>")
     .addClass("col-xl-2 saveBtn p-3 text-center");
