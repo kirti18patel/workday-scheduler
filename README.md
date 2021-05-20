@@ -15,7 +15,7 @@ click the link below to check the repository : [Github Repository Link](https://
 - [x] Load business hours when scrolling
 - [x] User can add task by clicking on text area
 - [x] User can save task by clicking on save button
-- [x] Color of text area changes according to time - pas present or future
+- [x] Color of text area changes according to time - past present or future
 
 ## Preview
 ![alt screenshot1](/assets/images/img1.png)
