@@ -8,6 +8,10 @@ var tasks = [];
 
 var timeAllDay = ["9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"];
 
+var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
 var displayAll = function(){
     for( var i=0; i<timeAllDay.length; i++)
     {   
@@ -62,6 +66,9 @@ var displayChangedData = function(){
     var index = $(this)
     .closest(".row")
     .index();
+    
+    tasks.push({"id":index, "task":taskTextFromInput, "time":moment().format('h A')});
+    saveTasks();
 
     // recreate span and insert in place of input element
     var statusEl = $("<div>")
