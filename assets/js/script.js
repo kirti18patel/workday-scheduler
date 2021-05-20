@@ -32,8 +32,12 @@ var displayAll = function(){
     .addClass("col-xl-8 p-3")
     .text("")
     .attr("id",i);
-    if(currentHour === timeAllDay[i]){
+
+    if((i+9) == moment().hours()){
         statusEl.addClass("present");
+    }
+    else if((i+9)>moment().hours()){
+        statusEl.addClass("future");
     }
     else{
         statusEl.addClass("past");
@@ -51,40 +55,45 @@ var displayAll = function(){
 displayAll();
 loadTasks();
 
-$(".col-xl-8").on("click",function(){
-    debugger;
+var handleTaskClick = function(){
     // get current text in task status box
     var taskText = $(this)
     .text()
     .trim();
-    
     // create new input element
     var taskTextInput = $("<input>")
     .attr("type", "text")
-    .addClass("col-xl-8 p-3 present")
+    .addClass($(this).attr("class"))
+    .text(taskText)
     .val(taskText);
+
+    taskTextInput.on("click", handleTaskClick);
     $(this).replaceWith(taskTextInput);
     taskTextInput.trigger("focus");
-});
+};
+$(".col-xl-8").on("click", handleTaskClick);
 
 var displayChangedData = function(){
     $(".row").on("change", "input[type='text']", function() {
     // get  text and position in the list
     var taskTextFromInput = $(this).val();
-
     var index = $(this)
     .closest(".row")
     .index();
-    
-    tasks.push({"id":index, "task":taskTextFromInput, "time":moment().format('h A')});
-    saveTasks();
+    console.log(index);
+    if(index>(-1)){
+        tasks.push({"id":index, "task":taskTextFromInput, "time":moment().format('h A')});
+        saveTasks();
+    }
 
     // recreate span and insert in place of input element
     var statusEl = $("<div>")
-    .addClass("col-xl-8 p-3 past")
+    .addClass($(this).attr("class"))
     .text(taskTextFromInput);
+
+    statusEl.on("click", handleTaskClick);
     $(this).replaceWith(statusEl);
 });
 }
 
-$(".saveBtn").on("click", displayChangedData());
+$(".saveBtn").on("click", displayChangedData);
