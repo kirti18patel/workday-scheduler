@@ -56,33 +56,27 @@ displayAll();
 loadTasks();
 
 var handleTaskClick = function(){
-    // debugger;
     // get current text in task status box
     var taskText = $(this)
     .text()
     .trim();
-    
     // create new input element
     var taskTextInput = $("<input>")
     .attr("type", "text")
-    .addClass("col-xl-8 p-3 present")
+    .addClass($(this).attr("class"))
     .text(taskText)
     .val(taskText);
 
     taskTextInput.on("click", handleTaskClick);
     $(this).replaceWith(taskTextInput);
     taskTextInput.trigger("focus");
-
-
 };
 $(".col-xl-8").on("click", handleTaskClick);
 
 var displayChangedData = function(){
-    console.log("Save button clicked");
     $(".row").on("change", "input[type='text']", function() {
     // get  text and position in the list
     var taskTextFromInput = $(this).val();
-
     var index = $(this)
     .closest(".row")
     .index();
@@ -92,7 +86,7 @@ var displayChangedData = function(){
 
     // recreate span and insert in place of input element
     var statusEl = $("<div>")
-    .addClass("col-xl-8 p-3 past")
+    .addClass($(this).attr("class"))
     .text(taskTextFromInput);
 
     statusEl.on("click", handleTaskClick);
