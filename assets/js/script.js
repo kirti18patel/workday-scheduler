@@ -32,8 +32,12 @@ var displayAll = function(){
     .addClass("col-xl-8 p-3")
     .text("")
     .attr("id",i);
-    if(currentHour === timeAllDay[i]){
+
+    if((i+9) == moment().hours()){
         statusEl.addClass("present");
+    }
+    else if((i+9)>moment().hours()){
+        statusEl.addClass("future");
     }
     else{
         statusEl.addClass("past");
