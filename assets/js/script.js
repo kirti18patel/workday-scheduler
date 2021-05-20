@@ -35,3 +35,19 @@ var displayAll = function(){
 };
 
 displayAll();
+
+$(".col-xl-8").on("click",function(){
+    console.log("jjj");
+    // get current text in task status box
+    var taskText = $(this)
+    .text()
+    .trim();
+    
+    // create new input element
+    var taskTextInput = $("<input>")
+    .attr("type", "text")
+    .addClass("col-xl-8 p-3 present")
+    .val(taskText);
+    $(this).replaceWith(taskTextInput);
+    taskTextInput.trigger("focus");
+});
