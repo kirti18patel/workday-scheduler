@@ -80,7 +80,6 @@ var displayChangedData = function(){
     var index = $(this)
     .closest(".row")
     .index();
-    console.log(index);
     if(index>(-1)){
         tasks.push({"id":index, "task":taskTextFromInput, "time":moment().format('h A')});
         saveTasks();
