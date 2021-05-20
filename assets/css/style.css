@@ -63,10 +63,13 @@ body {
     border-bottom-right-radius: 15px;
     background-color: #06AED5;
     color: white;
+    font-size: 2rem;
   }
   
   .saveBtn i:hover {
-    font-size: 20px;
+    font-size: 2.5rem;
     transition: all .3s ease-in-out;
   }
+
+  
   
