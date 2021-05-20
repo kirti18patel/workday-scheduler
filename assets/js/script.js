@@ -4,7 +4,7 @@ var currentHour = moment().format('h A');
 // updated current date in page
 $("#currentDay").text(currentDate);
 
-var tasks = [];
+var statusEl;
 
 var timeAllDay = ["9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"];
 
@@ -12,20 +12,26 @@ var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
+var loadTasks = function() {
+    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(element => $("#"+element.id)
+    .text(element.task));
+};
+
 var displayAll = function(){
     for( var i=0; i<timeAllDay.length; i++)
     {   
         var rowEl = $("<div>")
-        .addClass("row")
-        .attr("id",i);
+        .addClass("row");
 
         var hourEl = $("<div>")
     .addClass("col-xl-2 hour p-3 text-right")
     .text(timeAllDay[i]);
 
-    var statusEl = $("<div>")
+    statusEl = $("<div>")
     .addClass("col-xl-8 p-3")
-    .text("");
+    .text("")
+    .attr("id",i);
     if(currentHour === timeAllDay[i]){
         statusEl.addClass("present");
     }
@@ -41,9 +47,12 @@ var displayAll = function(){
 
     $(".container").append(rowEl);}
 };
+
 displayAll();
+loadTasks();
 
 $(".col-xl-8").on("click",function(){
+    debugger;
     // get current text in task status box
     var taskText = $(this)
     .text()
