@@ -4,12 +4,14 @@ var currentHour = moment().format('h A');
 // updated current date in page
 $("#currentDay").text(currentDate);
 
+var timeAllDay = ["9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"];
 // var containerEl = document.querySelector(".container");
 var displayAll = function(){
-    var timeAllDay = ["9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"];
     for( var i=0; i<timeAllDay.length; i++)
     {   
-        var rowEl = $("<div>").addClass("row");
+        var rowEl = $("<div>")
+        .addClass("row")
+        .attr("id",i);
 
         var hourEl = $("<div>")
     .addClass("col-xl-2 hour p-3 text-right")
@@ -35,9 +37,7 @@ var displayAll = function(){
 };
 
 displayAll();
-
 $(".col-xl-8").on("click",function(){
-    console.log("jjj");
     // get current text in task status box
     var taskText = $(this)
     .text()
@@ -50,4 +50,21 @@ $(".col-xl-8").on("click",function(){
     .val(taskText);
     $(this).replaceWith(taskTextInput);
     taskTextInput.trigger("focus");
+});
+$(".row").on("change", "input[type='text']", function() {
+    // get  text and position in the list
+    var taskTextFromInput = $(this).val();
+
+    var index = $(this)
+    .closest(".row")
+    .index();
+    // saveTask()
+
+      // recreate span and insert in place of input element
+    var statusEl = $("<div>")
+    .addClass("col-xl-8 p-3 past")
+    .text(taskTextFromInput);
+    $(this).replaceWith(statusEl);
+    
+    // auditTask($(taskSpan).closest(".list-group-item"));
 });
