@@ -4,7 +4,7 @@
 click the link below to visit the website : [Work Day Scheduler Link](https://kirti18patel.github.io/workday-scheduler/)
 
 ## Repository
-click the link below to check the repository : [Github Repository Link](https://github.com/kirti18patel/codeQuiz)
+click the link below to check the repository : [Github Repository Link](https://github.com/kirti18patel/workday-scheduler)
 
 ### Tech Used
     -HTML 
